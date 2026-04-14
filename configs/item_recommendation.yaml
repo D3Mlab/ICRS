@@ -1,0 +1,53 @@
+method: BM25 # UMBRELLA_LLM, FUSION_DENSE, DENSE, UMBRELLA_VLM, BM25, VISON, RERANK, UMBRELLA_VLM_LIST, VISON_LIST, UMBRELLA_LLM_LIST
+batch_size: 10
+self_consistency_k: 1
+llm:
+  provider: google
+  api_key: "${GOOGLE_API_KEY}"
+  model: gemini-2.5-pro
+  # provider: openrouter
+  # api_key: "${OPENROUTER_API_KEY}"
+  # model: qwen/qwen3-vl-30b-a3b-instruct
+  # provider: openai
+  # api_key: "${OPENAI_API_KEY}"
+  # model: gpt-5.1
+  temperature: 0.2
+  temperature_jitter: 0.3
+
+fusion:
+  aggregation: mean
+
+fusion_dense:
+  model_name: "qwen/qwen3-embedding-8b"
+  aggregation: mean
+  normalize_embeddings: true
+  api_base: "https://openrouter.ai/api/v1"
+  api_key_env: "OPENROUTER_API_KEY"
+  request_timeout: 60
+  batch_size: 64
+
+dense:
+  model_name: "qwen/qwen3-embedding-8b"
+  normalize_embeddings: true
+  api_base: "https://openrouter.ai/api/v1"
+  api_key_env: "OPENROUTER_API_KEY"
+  request_timeout: 60
+  batch_size: 64
+
+cross_encoder:
+  model_name: zeroentropy/zerank-2  # or any cross-encoder model
+  batch_size: 32
+  device: cpu  # or "cuda", "cpu", etc.
+
+rerank:
+  bm25_k1: 1.5
+  bm25_b: 0.75
+  initial_k: 100
+  rerank_model: "rerank-v3.5"
+  rerank_api_key_env: "COHERE_API_KEY"
+  rerank_top_n: 10
+  request_timeout: 30
+
+bm25:
+  k1: 1.5  # BM25 parameter (default: 1.5)
+  b: 0.75  #

@@ -1,0 +1,21 @@
+method: TEXT_BM25 # choices: TEXT_BM25, TEXT_DENSE, TEXT_EXACT_FUZZY, LLM_JUDGE, TEXT_DENSE_EXPANSION
+text_fields: []
+bm25:
+  k1: 1.5
+  b: 0.75
+dense:
+  model_name: "Qwen/Qwen3-Embedding-8B"
+  #model_name: "Qwen/Qwen3-Embedding-8B"
+  normalize_embeddings: true
+  # Optional online embedding backend (OpenAI-compatible)
+  provider: "openrouter"
+  api_key: "${OPENROUTER_API_KEY}"
+  base_url: "https://openrouter.ai/api/v1"
+top_k: 50
+
+llm:
+  provider: openai  # or openai
+  model: gpt-4o-mini         # e.g., gpt-4o-mini
+  cache_dir: data/fashion/cache/llm_responses
+
+

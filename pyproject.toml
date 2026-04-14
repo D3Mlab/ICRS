@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "icrs"
+version = "0.1.0"
+description = "Immersive conversational recommendation system pipeline and evaluation."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "torch>=2.0.0",
+    "torchvision>=0.15.0",
+    "opencv-python>=4.8.0.76",
+    "numpy>=1.24.0",
+    "segment-anything @ git+https://github.com/facebookresearch/segment-anything.git",
+    "openai>=1.0.0",
+    "scikit-learn>=1.3.0",
+    "tqdm>=4.66.0",
+]
+
+[project.scripts]
+icrs = "main:main"
+
+[tool.setuptools.packages.find]
+exclude = ["tests*", "data*", "results*", "notebooks*"]
+
+[tool.setuptools.data-files]
+"configs" = ["configs/*.yaml"]
+

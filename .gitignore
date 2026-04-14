@@ -1,0 +1,13 @@
+.venv
+.DS_Store
+pycache/
+__pycache__/
+artifacts/
+cache/
+*.egg-info/
+results/
+log/
+reports/
+data/
+pre_run_results/
+.zip

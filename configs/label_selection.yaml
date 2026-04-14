@@ -1,0 +1,62 @@
+index:
+  granularity: mixed
+  fields_include: []
+  fields_exclude:
+  - doc_id
+  - id
+  - method
+  - segment_file
+  - confidence
+  - catalogue
+  window:
+    size: 2
+    stride: 1
+  normalize:
+    lower: false
+    deaccent: true
+    strip_punct: false
+method:
+  name: bm25
+  bm25:
+    k1: 1.5
+    b: 0.75
+  dense:
+    model_name: qwen/qwen3-embedding-8b
+    normalize_embeddings: true
+    api_base: https://openrouter.ai/api/v1
+    api_key_env: OPENROUTER_API_KEY
+    request_timeout: 60
+  llm:
+    provider: openai
+    model: gpt-5.1
+    max_retries: 1
+    timeout_s: 30
+    api_key_env: OPENAI_API_KEY
+    require_reason: true
+    use_image: true
+  rerank:
+    bm25_k1: 1.5
+    bm25_b: 0.75
+    initial_k: 10
+    rerank_model: cohere/rerank-v3.5
+    rerank_top_n: 5
+    rerank_api_key_env: COHERE_API_KEY
+    request_timeout: 30
+  llm_expansion:
+    provider: google
+  clip:
+    model_name: clip-vit-large-patch14
+    normalize_embeddings: true
+    api_base: https://openrouter.ai/api/v1
+    api_key_env: OPENROUTER_API_KEY
+    request_timeout: 60
+    fusion_method: late
+    require_reason: true
+    summarize_conversation: true
+    gemini_model: gemini-2.0-flash-exp
+limits:
+  max_snippets_per_doc: 200
+  topk: 100
+logging:
+  save_details: true
+  verbose: false

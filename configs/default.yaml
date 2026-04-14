@@ -1,0 +1,11 @@
+seed: 42
+w_text: 0.7
+w_image: 0.3
+k: 20
+m: 5
+min_match_threshold: 0.65
+min_margin: 0.05
+tfidf_max_features: 20000
+image_hist_bins: 64
+llm_enable: false
+
